@@ -10,6 +10,11 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
   findAll() {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      relations: ['books'],
+    });
+  }
+  findOne(id: number) {
+    return this.userRepository.findOne({ where: { id }, relations: ['books'] });
   }
 }

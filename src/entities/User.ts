@@ -1,4 +1,11 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Book } from './Book';
 
 @Index('user_pkey', ['id'], { unique: true })
 @Entity('user', { schema: 'public' })
@@ -27,4 +34,7 @@ export class User {
 
   @Column('timestamp with time zone', { name: 'updatedAt' })
   updatedAt: Date;
+
+  @OneToMany(() => Book, (book) => book.user)
+  books: Book[];
 }

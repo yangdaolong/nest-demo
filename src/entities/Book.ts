@@ -1,23 +1,35 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from './User';
 
-@Index("book_pkey", ["id"], { unique: true })
-@Entity("book", { schema: "public" })
+@Index('book_pkey', ['id'], { unique: true })
+@Entity('book', { schema: 'public' })
 export class Book {
-  @PrimaryGeneratedColumn({ type: "integer", name: "id" })
+  @PrimaryGeneratedColumn({ type: 'integer', name: 'id' })
   id: number;
 
-  @Column("character varying", { name: "name", nullable: true, length: 255 })
+  @Column('character varying', { name: 'name', nullable: true, length: 255 })
   name: string | null;
 
-  @Column("integer", { name: "userid", nullable: true })
+  @Column('integer', { name: 'userid', nullable: true })
   userid: number | null;
 
-  @Column("integer", { name: "cateid", nullable: true })
+  @Column('integer', { name: 'cateid', nullable: true })
   cateid: number | null;
 
-  @Column("timestamp with time zone", { name: "createdAt" })
+  @Column('timestamp with time zone', { name: 'createdAt' })
   createdAt: Date;
 
-  @Column("timestamp with time zone", { name: "updatedAt" })
+  @Column('timestamp with time zone', { name: 'updatedAt' })
   updatedAt: Date;
+
+  @ManyToOne(() => User, (user) => user.books)
+  @JoinColumn({ name: 'userid' })
+  user: User | null;
 }
