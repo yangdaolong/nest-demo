@@ -18,4 +18,14 @@ export class BookService {
 
     return { books, users };
   }
+  async addBook() {
+    const book = new Book();
+    book.name = 'test book';
+    book.userid = 1;
+    book.cateid = 1;
+    return this.bookRepository.save(book);
+  }
+  async deleteBook(id: number) {
+    return this.bookRepository.softDelete({ id });
+  }
 }

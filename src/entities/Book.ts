@@ -1,10 +1,13 @@
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { User } from './User';
 
@@ -23,11 +26,14 @@ export class Book {
   @Column('integer', { name: 'cateid', nullable: true })
   cateid: number | null;
 
-  @Column('timestamp with time zone', { name: 'createdAt' })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column('timestamp with time zone', { name: 'updatedAt' })
+  @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
   @ManyToOne(() => User, (user) => user.books)
   @JoinColumn({ name: 'userid' })
