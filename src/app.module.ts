@@ -3,9 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Book } from './entities/Book';
-import { Cate } from './entities/Cate';
-import { User } from './entities/User';
+import { BookModule } from './book/book.module';
 import { UserModule } from './user/user.module';
 @Module({
   imports: [
@@ -19,11 +17,13 @@ import { UserModule } from './user/user.module';
       username: 'postgres',
       password: '123456',
       database: 'test',
-      entities: [User, Book, Cate],
+      entities: [__dirname + '/entities/**/*.ts'],
       synchronize: false, // 开发环境自动创建表结构
       logging: true, // 日志输出SQL语句
+      autoLoadEntities: true,
     }),
     UserModule,
+    BookModule,
   ],
   controllers: [AppController],
   providers: [AppService],
