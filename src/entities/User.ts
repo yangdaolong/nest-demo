@@ -41,6 +41,6 @@ export class User {
   @DeleteDateColumn({ name: 'deletedAt' })
   deletedAt: Date;
 
-  @OneToMany(() => Book, (book) => book.user)
+  @OneToMany(() => Book, (book) => book.user, { cascade: true })
   books: Book[];
 }

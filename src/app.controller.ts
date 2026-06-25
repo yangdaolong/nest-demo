@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Redirect } from '@nestjs/common';
+import { ApiExcludeEndpoint } from '@nestjs/swagger';
 import { AppService } from './app.service';
 
 @Controller()
@@ -6,11 +7,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-  @Get('hello')
-  getHello2(): string {
-    return this.appService.getHello2();
+  @Redirect('/docs')
+  @ApiExcludeEndpoint()
+  getHello(): void {
+    //跳转swagger文档 代码如下：
   }
 }

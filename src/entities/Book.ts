@@ -35,7 +35,7 @@ export class Book {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @ManyToOne(() => User, (user) => user.books)
+  @ManyToOne(() => User, (user) => user.books, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userid' })
   user: User | null;
 }

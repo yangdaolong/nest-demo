@@ -17,4 +17,15 @@ export class UserService {
   findOne(id: number) {
     return this.userRepository.findOne({ where: { id }, relations: ['books'] });
   }
+  delete(id: number) {
+    return this.userRepository.delete(id);
+  }
+  //分页查询
+  findAllPage(page: number, pageSize: number) {
+    return this.userRepository.find({
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+      relations: ['books'],
+    });
+  }
 }

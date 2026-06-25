@@ -23,7 +23,19 @@ export class BookService {
     book.name = 'test book';
     book.userid = 1;
     book.cateid = 1;
-    return this.bookRepository.save(book);
+
+    const user = new User();
+    user.username = 'test user';
+    user.password = '123456';
+    user.level = 1;
+    user.point = 0;
+    user.books = [book];
+
+    await this.bookRepository.manager.transaction(async (manager) => {
+      await manager.save(user);
+    });
+
+    return user;
   }
   async deleteBook(id: number) {
     return this.bookRepository.softDelete({ id });
