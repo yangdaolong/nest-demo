@@ -1,9 +1,12 @@
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Book } from './Book';
 
@@ -29,11 +32,14 @@ export class User {
   @Column('integer', { name: 'level', nullable: true, default: () => '0' })
   level: number | null;
 
-  @Column('timestamp with time zone', { name: 'createdAt' })
+  @CreateDateColumn({ name: 'createdAt' })
   createdAt: Date;
 
-  @Column('timestamp with time zone', { name: 'updatedAt' })
+  @UpdateDateColumn({ name: 'updatedAt' })
   updatedAt: Date;
+
+  @DeleteDateColumn({ name: 'deletedAt' })
+  deletedAt: Date;
 
   @OneToMany(() => Book, (book) => book.user)
   books: Book[];

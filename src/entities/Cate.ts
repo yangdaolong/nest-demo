@@ -1,20 +1,31 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  Index,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Index("cate_pkey", ["id"], { unique: true })
-@Entity("cate", { schema: "public" })
+@Index('cate_pkey', ['id'], { unique: true })
+@Entity('cate', { schema: 'public' })
 export class Cate {
-  @PrimaryGeneratedColumn({ type: "integer", name: "id" })
+  @PrimaryGeneratedColumn({ type: 'integer', name: 'id' })
   id: number;
 
-  @Column("character varying", { name: "label", nullable: true, length: 255 })
+  @Column('character varying', { name: 'label', nullable: true, length: 255 })
   label: string | null;
 
-  @Column("character varying", { name: "desc", nullable: true, length: 255 })
+  @Column('character varying', { name: 'desc', nullable: true, length: 255 })
   desc: string | null;
 
-  @Column("timestamp with time zone", { name: "createdAt" })
+  @CreateDateColumn({ name: 'createdAt' })
   createdAt: Date;
 
-  @Column("timestamp with time zone", { name: "updatedAt" })
+  @UpdateDateColumn({ name: 'updatedAt' })
   updatedAt: Date;
+
+  @DeleteDateColumn({ name: 'deletedAt' })
+  deletedAt: Date;
 }

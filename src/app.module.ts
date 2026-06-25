@@ -9,14 +9,15 @@ import { UserModule } from './user/user.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // 设置为全局配置
+      envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '123456',
-      database: 'test',
+      host: process.env.db_host,
+      port: Number(process.env.db_port),
+      username: process.env.db_username,
+      password: process.env.db_password,
+      database: process.env.db_database,
       entities: [__dirname + '/entities/**/*.ts'],
       synchronize: false, // 开发环境自动创建表结构
       logging: true, // 日志输出SQL语句
