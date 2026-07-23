@@ -6,20 +6,22 @@ import {
   Param,
   Post,
   Query,
+  Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBasicAuth } from '@nestjs/swagger';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { User } from 'src/entities/User';
-import { BasicAuthGuard } from 'src/auth/basic-auth.guard';
 import { UserService } from './user.service';
 
-@ApiBasicAuth()
-@UseGuards(BasicAuthGuard)
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
   @Get('findAll')
-  findAll() {
+  findAll(@Req() req) {
+    console.log(req.user);
     return this.userService.findAll();
   }
   @Get('findOne')

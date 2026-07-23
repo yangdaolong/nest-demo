@@ -40,4 +40,7 @@ export class UserService {
       .execute();
     // return this.userRepository.update(id, user);
   }
+  findByUsername(username: string, password: string) {
+    return this.userRepository.findOne({ where: { username, password } });
+  }
 }
