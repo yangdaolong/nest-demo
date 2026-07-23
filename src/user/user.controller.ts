@@ -6,10 +6,15 @@ import {
   Param,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { ApiBasicAuth } from '@nestjs/swagger';
 import { User } from 'src/entities/User';
+import { BasicAuthGuard } from 'src/auth/basic-auth.guard';
 import { UserService } from './user.service';
 
+@ApiBasicAuth()
+@UseGuards(BasicAuthGuard)
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
