@@ -18,7 +18,7 @@ export class UserService {
     return this.userRepository.findOne({ where: { id }, relations: ['books'] });
   }
   delete(id: number) {
-    return this.userRepository.delete(id);
+    return this.userRepository.softDelete(id);
   }
   //分页查询
   findAllPage(page: number, pageSize: number) {
@@ -27,5 +27,17 @@ export class UserService {
       take: pageSize,
       relations: ['books'],
     });
+  }
+  async edit(id: number, user: User) {
+    return this.userRepository
+      .createQueryBuilder()
+      .update(User)
+      .set(user)
+      .where('id = :id and updatedAt = :updatedAt and deletedAt is null', {
+        id: id,
+        updatedAt: user.updatedAt,
+      })
+      .execute();
+    // return this.userRepository.update(id, user);
   }
 }

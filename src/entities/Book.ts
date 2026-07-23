@@ -26,13 +26,13 @@ export class Book {
   @Column('integer', { name: 'cateid', nullable: true })
   cateid: number | null;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'createdAt', precision: 3 })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updatedAt', precision: 3 })
   updatedAt: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({ name: 'deletedAt', precision: 3 })
   deletedAt: Date;
 
   @ManyToOne(() => User, (user) => user.books, { onDelete: 'CASCADE' })

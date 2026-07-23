@@ -20,12 +20,12 @@ export class Cate {
   @Column('character varying', { name: 'desc', nullable: true, length: 255 })
   desc: string | null;
 
-  @CreateDateColumn({ name: 'createdAt' })
+  @CreateDateColumn({ name: 'createdAt', precision: 3 })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updatedAt' })
+  @UpdateDateColumn({ name: 'updatedAt', precision: 3 })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deletedAt' })
+  @DeleteDateColumn({ name: 'deletedAt', precision: 3 })
   deletedAt: Date;
 }

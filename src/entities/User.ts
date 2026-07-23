@@ -32,13 +32,13 @@ export class User {
   @Column('integer', { name: 'level', nullable: true, default: () => '0' })
   level: number | null;
 
-  @CreateDateColumn({ name: 'createdAt' })
+  @CreateDateColumn({ name: 'createdAt', precision: 3 })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updatedAt' })
+  @UpdateDateColumn({ name: 'updatedAt', precision: 3 })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deletedAt' })
+  @DeleteDateColumn({ name: 'deletedAt', precision: 3 })
   deletedAt: Date;
 
   @OneToMany(() => Book, (book) => book.user, { cascade: true })

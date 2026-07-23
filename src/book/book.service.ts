@@ -13,10 +13,9 @@ export class BookService {
     private userRepository: Repository<User>,
   ) {}
   async findAll() {
-    const users = await this.userRepository.find();
     const books = await this.bookRepository.find();
 
-    return { books, users };
+    return books;
   }
   async addBook() {
     const book = new Book();
