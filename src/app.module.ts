@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { BookModule } from './book/book.module';
 import { CateModule } from './cate/cate.module';
 import { UserModule } from './user/user.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,10 +21,9 @@ import { UserModule } from './user/user.module';
       username: process.env.db_username,
       password: process.env.db_password,
       database: process.env.db_database,
-      entities: [__dirname + '/entities/**/*.ts'],
+      autoLoadEntities: true,
       synchronize: process.env.NODE_ENV === 'development', // 开发环境自动创建表结构
       logging: true, // 日志输出SQL语句
-      autoLoadEntities: true,
     }),
     AuthModule,
     UserModule,

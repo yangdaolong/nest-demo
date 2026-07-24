@@ -1,9 +1,10 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { forwardRef, Global, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
+@Global()
 @Module({
   imports: [
     JwtModule.registerAsync({
