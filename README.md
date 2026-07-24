@@ -96,3 +96,26 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+    生成模块（module）
+
+nest g module auth
+
+会创建 auth.module.ts 并自动注册到 app.module.ts。
+
+    生成控制器（controller）
+
+nest g controller products
+
+会创建 REST API 控制器文件，包含基本的 CRUD 方法占位符。
+
+    生成服务（service）
+
+nest g service orders
+
+会创建业务逻辑层文件，并自动注入到对应模块。
+
+    一键生成 CRUD 资源（resource）
+
+nest g resource users

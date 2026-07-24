@@ -12,6 +12,7 @@
     "start:dev": "cross-env NODE_ENV=development nest start --watch",
     "start:debug": "cross-env NODE_ENV=development nest start --debug --watch",
     "start:prod": "cross-env NODE_ENV=production node dist/main",
+    "start:pm2": "pm2 start dist/main.js --name \"nestjs-app\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --env=js",
     "test:watch": "jest --watch",

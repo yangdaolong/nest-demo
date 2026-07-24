@@ -21,7 +21,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
   @Get('findAll')
   findAll(@Req() req) {
-    console.log(req.user);
     return this.userService.findAll();
   }
   @Get('findOne')
@@ -43,7 +42,6 @@ export class UserController {
   @Post('edit/:id')
   async edit(@Param('id') id: number, @Body() user: UserEditDto) {
     // const user_ = await this.userService.findOne(id);
-    console.log(user);
     // if (user_?.updatedAt.getTime() != new Date(user.updatedAt).getTime()) {
     //   throw new HttpException('用户已被修改', 400);
     // }
