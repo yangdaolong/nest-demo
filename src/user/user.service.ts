@@ -19,7 +19,7 @@ export class UserService {
     return this.userRepository.findOne({ where: { id }, relations: ['books'] });
   }
   delete(id: number) {
-    return this.userRepository.softDelete(id);
+    return this.userRepository.delete(id);
   }
   //分页查询
   findAllPage(page: number, pageSize: number) {
