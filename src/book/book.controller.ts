@@ -1,7 +1,11 @@
-import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { Controller, Get, Inject, Param, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { BookService } from './book.service';
 
 @Controller('book')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 export class BookController {
   constructor(
     @Inject(BookService)

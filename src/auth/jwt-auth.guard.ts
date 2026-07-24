@@ -1,7 +1,7 @@
 import {
-  Injectable,
   CanActivate,
   ExecutionContext,
+  Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -12,13 +12,18 @@ export class JwtAuthGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest();
-    const authHeader = request.headers.authorization;
+    // const authHeader = request.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    // if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    //   throw new UnauthorizedException('缺少认证令牌');
+    // }
+
+    // const token = authHeader.split(' ')[1];
+    const token = request.cookies.access_token;
+
+    if (!token) {
       throw new UnauthorizedException('缺少认证令牌');
     }
-
-    const token = authHeader.split(' ')[1];
 
     try {
       const payload = this.jwtService.verify(token);

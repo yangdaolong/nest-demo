@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Cate } from './Cate';
 import { User } from './User';
 
 @Index('book_pkey', ['id'], { unique: true })
@@ -38,4 +39,8 @@ export class Book {
   @ManyToOne(() => User, (user) => user.books, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userid' })
   user: User | null;
+
+  @ManyToOne(() => Cate, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'cateid' })
+  cate: Cate | null;
 }

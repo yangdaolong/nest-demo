@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entities/User';
 import { Repository } from 'typeorm';
+import { UserEditDto } from './userEdit.dto';
 
 @Injectable()
 export class UserService {
@@ -28,7 +29,7 @@ export class UserService {
       relations: ['books'],
     });
   }
-  async edit(id: number, user: User) {
+  async edit(id: number, user: UserEditDto) {
     return this.userRepository
       .createQueryBuilder()
       .update(User)

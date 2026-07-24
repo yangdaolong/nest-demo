@@ -41,12 +41,12 @@ export class AuthController {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     res.cookie('access_token', access_token, {
       httpOnly: true,
-      maxAge: 3600 * 1000,
+      maxAge: 3600 * 1000 * 24 * 30,
     });
     return {
       access_token,
       token_type: 'bearer',
-      expires_in: 3600,
+      expires_in: 3600 * 1000 * 24 * 30,
     };
   }
 }

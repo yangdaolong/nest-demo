@@ -6,10 +6,18 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Module({
   imports: [
-    JwtModule.register({
-      secret: 'nest-demo-secret-key',
-      signOptions: { expiresIn: '1h' },
+    JwtModule.registerAsync({
+      useFactory() {
+        const JWT_SECRET = process.env.jwt_secret;
+        return {
+          secret: JWT_SECRET,
+          signOptions: {
+            expiresIn: '30d',
+          },
+        };
+      },
     }),
+
     forwardRef(() => UserModule),
   ],
   controllers: [AuthController],

@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { User } from 'src/entities/User';
 import { UserService } from './user.service';
+import { UserEditDto } from './userEdit.dto';
 
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
@@ -41,7 +41,7 @@ export class UserController {
     return this.userService.findAllPage(page, pageSize);
   }
   @Post('edit/:id')
-  async edit(@Param('id') id: number, @Body() user: User) {
+  async edit(@Param('id') id: number, @Body() user: UserEditDto) {
     // const user_ = await this.userService.findOne(id);
     console.log(user);
     // if (user_?.updatedAt.getTime() != new Date(user.updatedAt).getTime()) {
@@ -51,11 +51,8 @@ export class UserController {
 
     const res = await this.userService.edit(id, user);
     if (res.affected == 0) {
-      throw new HttpException(
-        { status: 409, message: '用户不存在或已被修改' },
-        409,
-      );
+      throw new HttpException('用户不存在或已被修改', 409);
     }
-    return { status: 200, data: res, message: '用户成功修改' };
+    return { statusCode: 200, data: res, message: '用户成功修改' };
   }
 }
